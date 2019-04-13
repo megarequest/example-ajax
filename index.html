@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="script.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <style>
+    .container{
+        width: 700px;
+        margin: 1em auto;
+
+    }</style>
+    
+    <div class="container">
+        <nav class="container-menu">
+            <a href="/anokid.html">Андокид</a>
+            <a href="/lorka.html">Лорка</a>
+            <a href="/nizyana.html">Низяна</a>
+        </nav>
+
+        <h1 class="container-title">Главная</h1>
+        <div class="container-content">Добро пожаловать!</div>
+
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <button class="make_json_ajax">Клик!</button>
+    </div>
+    
+
+
+    <script>
+    
+    function serialize( obj ) {
+        return '?'+Object.keys(obj).reduce(function(a,k){a.push(k+'='+encodeURIComponent(obj[k]));return a},[]).join('&')
+    }
+    document.addEventListener('DOMContentLoaded', function(){
+        var button = document.querySelector('.make_json_ajax');
+
+        var data = {
+            name:"John Rambo", 
+            time:"2pm"
+        };
+        
+        button.addEventListener('click', function(){
+
+            var req = new XMLHttpRequest;
+                req.overrideMimeType("application/json");
+                req.open('GET', 'http://cl303109.tmweb.ru/'+serialize({
+                    name:data.name,
+                    time:data.time,
+                }), true);
+
+                req.onload = function() {
+                    console.log(this.response);
+                    console.log(JSON.parse(this.response));
+                };
+                req.send(null);
+        })
+
+    });
+    
+    </script>
+
+</body>
+</html>
